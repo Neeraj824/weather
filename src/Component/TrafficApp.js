@@ -22,7 +22,8 @@ class TrafficApp extends React.Component {
 
   fetchLatitudeLongitude = async () => {
     const { selectedDate } = this.state;
-    const apiKey = 'AIzaSyAUMAWEUUNLOyCAdAB88dWspZqF3YmF1-M';
+    const apiKey = process.env.REACT_APP_GOOGLE_API_KEY;
+    console.log(apiKey);
     try {
       const locations = await fetchLocations(selectedDate);
       const coordinates = locations.data.items[0].cameras.map(camera => ({
@@ -42,7 +43,7 @@ class TrafficApp extends React.Component {
           })
           .then(data => {
             // console.log(data);
-            const coordinates = data.results[0]?.geometry?.location;
+            // const coordinates = data.results[0]?.geometry?.location;
             // console.log("coordinates",coordinates);
 
             const address = data.results[0]?.formatted_address || 'Unknown Address';
